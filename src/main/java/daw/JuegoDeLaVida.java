@@ -10,7 +10,10 @@ package daw;
  */
 public class JuegoDeLaVida {
 
+    private Celula[][] matriz;
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
+
+    
 }
