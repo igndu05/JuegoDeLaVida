@@ -1,13 +1,15 @@
+package daw;
+import java.util.HashSet;
+
 public class Celula {
     private Posicion posicion;
     private boolean estado;
+    private final HashSet<Posicion> ADYACENTES;
 
-    public Celula(Posicion posicion, boolean estado) {
+    public Celula(Posicion posicion, boolean estado, int filas, int columnas) {
         this.posicion = posicion;
         this.estado = estado;
-    }
-
-    public Celula() {
+        this.ADYACENTES = this.posicion.recorrerAbyascente(filas, columnas);
     }
 
     public Posicion getPosicion() {
@@ -57,5 +59,19 @@ public class Celula {
     @Override
     public String toString() {
         return "Celula [posicion=" + posicion + ", estado=" + estado + "]";
+    }
+
+    private int CelulaVivaAlrededor(Celula[][] tableroCelulas) {
+        int contador = 0;
+        for (Posicion posicion : this.ADYACENTES) {
+            if (tableroCelulas[posicion.getFila()][posicion.getColumna()].isEstado() == true) {
+                contador += 1;
+            }
+        }
+        return contador;
+    }
+
+    public void ActualizarCelula(){
+        
     }
 }
