@@ -11,7 +11,7 @@ public class Celula {
         this.estado = estado;
         this.ADYACENTES = this.posicion.recorrerAbyascente(filas, columnas);
     }
-
+    
     public Posicion getPosicion() {
         return posicion;
     }
@@ -73,5 +73,24 @@ public class Celula {
 
     public void ActualizarCelula(){
         
+    }
+
+    public boolean EstadoCelulaSiguiente(Celula[][] tableroCelulas) {
+        int celulasVivas = CelulaVivaAlrededor(tableroCelulas);
+
+        if (this.estado == true) {
+            if (celulasVivas > 3) {
+                return false;
+            } else if (celulasVivas == 2 || celulasVivas == 3) {
+                return true;
+            } else if (celulasVivas == 0 || celulasVivas == 1) {
+                return false;
+            }
+        } else {
+            if (celulasVivas == 3) {
+                return true;
+            }
+        }
+        return this.estado;
     }
 }
