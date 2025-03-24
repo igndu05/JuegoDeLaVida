@@ -2,14 +2,16 @@ package daw;
 import java.util.HashSet;
 
 public class Celula {
+
     private Posicion posicion;
     private boolean estado;
     private final HashSet<Posicion> ADYACENTES;
+    // Necesitamos un atributo mas para no tener problemas con el tablero
 
-    public Celula(Posicion posicion, boolean estado, int filas, int columnas) {
+    public Celula(Posicion posicion, boolean estado, int filas) {
         this.posicion = posicion;
         this.estado = estado;
-        this.ADYACENTES = this.posicion.recorrerAbyascente(filas, columnas);
+        this.ADYACENTES = this.posicion.recorrerAbyacentes(filas);
     }
     
     public Posicion getPosicion() {
@@ -56,12 +58,13 @@ public class Celula {
         return true;
     }
 
+    // Para ahorrar trabajo en el futuro esto deberia ser blanco o negro segun el estado
     @Override
     public String toString() {
         return "Celula [posicion=" + posicion + ", estado=" + estado + "]";
     }
 
-    private int CelulaVivaAlrededor(Celula[][] tableroCelulas) {
+    private int celulaVivaAlrededor(Celula[][] tableroCelulas) {
         int contador = 0;
         for (Posicion posicion : this.ADYACENTES) {
             if (tableroCelulas[posicion.getFila()][posicion.getColumna()].isEstado() == true) {
@@ -71,11 +74,13 @@ public class Celula {
         return contador;
     }
 
-    public void ActualizarCelula(Celula[][] tableroCelulas){
-        CalcularSiguienteEstado(CelulaVivaAlrededor(tableroCelulas));    
+    // y tambien con este
+    public void actualizarCelula(Celula[][] tableroCelulas){
+        calcularSiguienteEstado(celulaVivaAlrededor(tableroCelulas));    
     }
 
-    private void CalcularSiguienteEstado(int numeroCelulasVivas) {
+    // El atributo nuevo tiene que ver con este metodo y con el anterior
+    private void calcularSiguienteEstado(int numeroCelulasVivas) {
         this.estado = switch (numeroCelulasVivas) {
             case 0, 1 -> false;
             case 2 -> this.estado;

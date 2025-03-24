@@ -20,20 +20,6 @@ public class Posicion {
         this.fila = -1;
     }
 
-    public void setColumna(int columna) {
-        if (columna < 0) {
-            throw new IllegalArgumentException("La columna debe ser mayor o igual a 0");
-        }
-        this.columna = columna;
-    }
-
-    public void setFila(int fila) {
-        if (fila < 0) {
-            throw new IllegalArgumentException("La fila debe ser mayor o igual a 0");
-        }
-        this.fila = fila;
-    }
-
     public int getColumna() {
         return columna;
     }
@@ -67,9 +53,27 @@ public class Posicion {
         return true;
     }
 
-    public HashSet<Posicion> recorrerAbyascente(int filas, int columnas) {
+    public boolean isValida(int tamaño) {
+        return columna >= 0 && columna <= tamaño && fila >= 0 && fila <= tamaño;
+    }
 
-        return null;
+    public HashSet<Posicion> recorrerAbyacentes(int tamaño) {
+        HashSet<Posicion> adyacentes = new HashSet<>();
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                try {
+                    adyacentes.add(new Posicion(columna + i, fila + j));
+                    // Como en el constructor de Posicion se lanza una excepcion 
+                    // si la posicion no es valida, no es necesario comprobar si es valida por el try catch
+                } catch (IllegalArgumentException e) {
+                    continue;
+                }
+            }
+        }
+        return adyacentes;
     }
 
 
