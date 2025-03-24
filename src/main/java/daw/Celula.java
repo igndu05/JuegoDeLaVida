@@ -71,26 +71,16 @@ public class Celula {
         return contador;
     }
 
-    public void ActualizarCelula(){
-        
+    public void ActualizarCelula(Celula[][] tableroCelulas){
+        CalcularSiguienteEstado(CelulaVivaAlrededor(tableroCelulas));    
     }
 
-    public boolean EstadoCelulaSiguiente(Celula[][] tableroCelulas) {
-        int celulasVivas = CelulaVivaAlrededor(tableroCelulas);
-
-        if (this.estado == true) {
-            if (celulasVivas > 3) {
-                return false;
-            } else if (celulasVivas == 2 || celulasVivas == 3) {
-                return true;
-            } else if (celulasVivas == 0 || celulasVivas == 1) {
-                return false;
-            }
-        } else {
-            if (celulasVivas == 3) {
-                return true;
-            }
-        }
-        return this.estado;
+    private void CalcularSiguienteEstado(int numeroCelulasVivas) {
+        this.estado = switch (numeroCelulasVivas) {
+            case 0, 1 -> false;
+            case 2 -> this.estado;
+            case 3 -> true;
+            default -> false;
+        };          
     }
 }
