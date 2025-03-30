@@ -83,5 +83,11 @@ public class Posicion {
         return adyacentes;
     }
 
+    // Copia y pega Quiros
+    public static Posicion parsePosicion (String posicion) {
+        
+        
+        return null;
+    }
 
 }

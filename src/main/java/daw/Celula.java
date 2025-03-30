@@ -62,12 +62,13 @@ public class Celula {
     // Para ahorrar trabajo en el futuro esto deberia ser blanco o negro segun el estado
     @Override
     public String toString() {
-        return "Celula [posicion=" + posicion + ", estado=" + estado + "]";
+        return (this.estado)?"\u2B1C":"\u2B1B";
     }
 
     private int celulaVivaAlrededor(Celula[][] tableroCelulas) {
         int contador = 0;
         for (Posicion posicion : this.ADYACENTES) {
+            // aqui hay fallos
             if (tableroCelulas[posicion.getFila()][posicion.getColumna()].isEstado() == true) {
                 contador += 1;
             }
@@ -75,7 +76,7 @@ public class Celula {
         return contador;
     }
 
-    public void actualizarSiguienteCelula(Celula[][] tableroCelulas){
+    public void actualizarSiguienteEstado(Celula[][] tableroCelulas){
         calcularSiguienteEstado(celulaVivaAlrededor(tableroCelulas));    
     }
 
@@ -91,4 +92,6 @@ public class Celula {
             default -> false;
         };          
     }
+
+
 }
