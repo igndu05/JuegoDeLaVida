@@ -3,12 +3,19 @@ import java.util.HashSet;
 
 
 public class Posicion {
+
+    public static void main(String[] args) {
+        
+    }
     private int columna;
     private int fila;
 
-    public Posicion(int columna, int fila) {
+    public Posicion(int columna, int fila, int tamaño) {
         if (columna < 0 || fila < 0) {
             throw new IllegalArgumentException("La columna y la fila deben ser mayores o iguales a 0");
+        }
+        if (fila > tamaño || columna > tamaño) {
+            throw new IllegalArgumentException("La columna y la fila no pueden ser mayores que el tamaño de la matriz");
         }
 
         this.columna = columna;
@@ -57,7 +64,7 @@ public class Posicion {
         return columna >= 0 && columna <= tamaño && fila >= 0 && fila <= tamaño;
     }
 
-    public HashSet<Posicion> recorrerAbyacentes(int tamaño) {
+    public HashSet<Posicion> recorrerAdyacentes(int tamaño) {
         HashSet<Posicion> adyacentes = new HashSet<>();
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -65,7 +72,7 @@ public class Posicion {
                     continue;
                 }
                 try {
-                    adyacentes.add(new Posicion(columna + i, fila + j));
+                    adyacentes.add(new Posicion(columna + i, fila + j, tamaño));
                     // Como en el constructor de Posicion se lanza una excepcion 
                     // si la posicion no es valida, no es necesario comprobar si es valida por el try catch
                 } catch (IllegalArgumentException e) {

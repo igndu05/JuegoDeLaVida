@@ -9,7 +9,7 @@ public class Tablero {
         tablero = new Celula[tamaño][tamaño];   
         for (int i = 0; i < tamaño; i++) {
             for (int j = 0; j < tamaño; j++) {
-                tablero[i][j] = new Celula(new Posicion(i, j), false, tamaño);
+                tablero[i][j] = new Celula(new Posicion(i, j, tamaño), false, tamaño);
             }
         }
     }
@@ -30,8 +30,10 @@ public class Tablero {
     }
 
     public void colocarCelulasAleatorias(int porcentaje) {  
+
     }
     public void colocarCelulasManualmente() {
+
     }
     
 

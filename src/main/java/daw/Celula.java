@@ -6,12 +6,13 @@ public class Celula {
     private Posicion posicion;
     private boolean estado;
     private final HashSet<Posicion> ADYACENTES;
+    private boolean siguienteEstado;
     // Necesitamos un atributo mas para no tener problemas con el tablero
 
     public Celula(Posicion posicion, boolean estado, int filas) {
         this.posicion = posicion;
         this.estado = estado;
-        this.ADYACENTES = this.posicion.recorrerAbyacentes(filas);
+        this.ADYACENTES = this.posicion.recorrerAdyacentes(filas);
     }
     
     public Posicion getPosicion() {
@@ -74,14 +75,16 @@ public class Celula {
         return contador;
     }
 
-    // y tambien con este
-    public void actualizarCelula(Celula[][] tableroCelulas){
+    public void actualizarSiguienteCelula(Celula[][] tableroCelulas){
         calcularSiguienteEstado(celulaVivaAlrededor(tableroCelulas));    
     }
 
-    // El atributo nuevo tiene que ver con este metodo y con el anterior
+    public void actualizarCelula(){
+        this.estado = siguienteEstado;
+    }
+
     private void calcularSiguienteEstado(int numeroCelulasVivas) {
-        this.estado = switch (numeroCelulasVivas) {
+        siguienteEstado = switch (numeroCelulasVivas) {
             case 0, 1 -> false;
             case 2 -> this.estado;
             case 3 -> true;
