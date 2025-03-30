@@ -8,7 +8,22 @@ public class Tablero {
     private Celula[][] tablero;
 
     public Tablero (Tablero tablero) {
+        // Obtenemos el tablero original
+        Celula[][] tableroOriginal = tablero.getTablero();
+        // Creamos un nuevo array con las mismas dimensiones
+        this.tablero = new Celula[tableroOriginal.length][tableroOriginal.length];
         
+        // Copiamos cada célula creando nuevas instancias
+        for (int i = 0; i < tableroOriginal.length; i++) {
+            for (int j = 0; j < tableroOriginal.length; j++) {
+                Celula original = tableroOriginal[i][j];
+                this.tablero[i][j] = new Celula(
+                    new Posicion(i, j, tableroOriginal.length),
+                    original.isEstado(),
+                    tableroOriginal.length
+                );
+            }
+        }
     }
 
     // Genera un tablero de tamaño NxN con celulas, todas muertas en inicio
@@ -30,9 +45,6 @@ public class Tablero {
         }
     }
 
-    // Aqui esta lo guapo
-    // Hay que conseguir que se actualice el tablero
-    // teniendo en cuenta que hay que actualizarlo todo a la vez
     public void actualizarTablero() {
         // Ambos bucles hacen la mismo
         for (int i = 0; i < tablero.length; i++) {
@@ -51,7 +63,7 @@ public class Tablero {
         Random r = new Random();
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                tablero[i][j] = new Celula(new Posicion(i, j, tablero.length), r.nextInt(1, 101) <= porcentaje, tablero.length);
+                tablero[i][j] = new Celula(new Posicion(i, j, tablero.length), (r.nextInt(1, 101) <= porcentaje), tablero.length);
             }
         }
     }
@@ -60,20 +72,16 @@ public class Tablero {
     public void colocarCelulasManualmente(String posStr) {
         Posicion pos = new Posicion();
         try {
-            pos = Posicion.parsePosicion(posStr);
+            pos = Posicion.parsePosicion(posStr, tablero.length);
         } catch (IllegalArgumentException iae) {
-            System.out.println("Posicion no valida");
+            System.out.println("Posicion no valida, el formato debe ser: 'fila columna'");
         }
-
         if (pos.getFila() != -1) {
             // Es valida
             tablero[pos.getFila()][pos.getColumna()].setEstado(true);
         }
-        
     }
     
-
-
     public Celula[][] getTablero() {
         return tablero;
     }

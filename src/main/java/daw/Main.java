@@ -88,8 +88,15 @@ public class Main {
             }
             case 2 -> {
                 // Aquí iría la lógica para la colocación manual
-                System.out.println("Colocación manual seleccionada");
-                System.out.println("work in progress");
+                System.out.println("Colocación manual seleccionada, # para terminar");
+                do {
+                    System.out.print("Ingrese la posición de la célula (fila columna): ");
+                    String posStr = sc.nextLine();
+                    if (posStr.equals("#")) {
+                        break;
+                    }
+                    juego.colocarCelulasManualmente(posStr);
+                } while (true);
             }
             default -> {
                 System.out.println("Opción no válida. Se usará colocación aleatoria.");
@@ -121,24 +128,36 @@ public class Main {
             
             switch (opcion) {
                 case 1 -> {
-                    juego.actualizarTablero();
-                    
-                    System.out.println("\n==== NUEVA GENERACIÓN ====");
-                    juego.mostrarTablero();
+                    try {
+                        juego.actualizarTablero();
+                        System.out.println("\n==== NUEVA GENERACIÓN ====");
+                        juego.mostrarTablero();
+                    } catch (IllegalStateException ise) {
+                        System.out.println("El tablero no ha cambiado en 3 iteraciones, finalizando...");
+                        volver = true;
+                    }
                 }
                 case 2 -> {
                     System.out.print("Número de generaciones a avanzar: ");
                     int numGeneraciones = introducirNumero(100);
-                    
+                    boolean finalizado = false;
                     for (int i = 0; i < numGeneraciones; i++) {
-                        System.out.println("\n==== GENERACIÓN " + i + " ====");
-                        juego.mostrarTablero();
                         
-                        juego.actualizarTablero();
+                        System.out.println("\n==== GENERACIÓN " + i + " ====");
+                        try {
+                            juego.actualizarTablero();
+                        } catch (IllegalStateException ise) {
+                            System.out.println("El tablero no ha cambiado en 3 iteraciones, finalizando...");
+                            finalizado = true;
+                            volver = true;
+                            break;
+                        }
+                        juego.mostrarTablero();
+                        }
+                    if (!finalizado) {
+                        System.out.println("\n==== GENERACIÓN " + numGeneraciones + " (FINAL) ====");
+                        juego.mostrarTablero();
                     }
-                    
-                    System.out.println("\n==== GENERACIÓN " + numGeneraciones + " (FINAL) ====");
-                    juego.mostrarTablero();
                 }
                 case 3 -> {
                     // Aquí iría el código para guardar el estado actual

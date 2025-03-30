@@ -1,12 +1,13 @@
 package daw;
-import java.util.HashSet;
 
+import java.util.HashSet;
 
 public class Posicion {
 
     public static void main(String[] args) {
-        
+
     }
+
     private int columna;
     private int fila;
 
@@ -14,12 +15,12 @@ public class Posicion {
         if (columna < 0 || fila < 0) {
             throw new IllegalArgumentException("La columna y la fila deben ser mayores o iguales a 0");
         }
-        if (fila > tamaño || columna > tamaño) {
+        if (fila >= tamaño || columna >= tamaño) {
             throw new IllegalArgumentException("La columna y la fila no pueden ser mayores que el tamaño de la matriz");
         }
 
         this.columna = columna;
-        this.fila = fila;          
+        this.fila = fila;
     }
 
     public Posicion() {
@@ -72,9 +73,10 @@ public class Posicion {
                     continue;
                 }
                 try {
-                    adyacentes.add(new Posicion(columna + i, fila + j, tamaño));
-                    // Como en el constructor de Posicion se lanza una excepcion 
-                    // si la posicion no es valida, no es necesario comprobar si es valida por el try catch
+                    adyacentes.add(new Posicion(fila + i, columna + j, tamaño));
+                    // Como en el constructor de Posicion se lanza una excepcion
+                    // si la posicion no es valida, no es necesario comprobar si es valida por el
+                    // try catch
                 } catch (IllegalArgumentException e) {
                     continue;
                 }
@@ -83,11 +85,21 @@ public class Posicion {
         return adyacentes;
     }
 
-    // Copia y pega Quiros
-    public static Posicion parsePosicion (String posicion) {
-        
-        
-        return null;
-    }
+    public static Posicion parsePosicion(String posStr, int tamaño) {
+        posStr = posStr.trim();
+        String[] arr = posStr.split(" ");
+        if (arr.length != 2) {
+            throw new IllegalArgumentException("Formato de posición inválido");
+        }
 
+        // Extraemos fila y columna del string
+        int fila = Integer.parseInt(arr[0]) - 1;
+        int columna = Integer.parseInt(arr[0]) - 1;
+        try{
+            return new Posicion(fila, columna, tamaño);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Formato de posición inválido");
+        }
+
+    }
 }

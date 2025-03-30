@@ -21,7 +21,7 @@ public class JuegoDeLaVida {
         if (tablero.equals(ultimoTablero)) {
             contador++;
             if (contador == 3) {
-                // throw;
+                throw new IllegalStateException("El tablero no ha cambiado en 3 iteraciones");
             }
         }
     }
