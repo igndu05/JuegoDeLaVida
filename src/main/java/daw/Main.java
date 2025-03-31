@@ -28,7 +28,7 @@ public class Main {
             
             switch (opcion) {
                 case 1 -> menuConfiguracion();
-                case 2 -> System.out.println("work in progress");//menuCarga();
+                case 2 -> System.out.println("work in progress"); //menuCarga();
                 case 0 -> {
                     salir = true;
                     System.out.println("¡Gracias por jugar!");
