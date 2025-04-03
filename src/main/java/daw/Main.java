@@ -162,7 +162,7 @@ public class Main {
                 case 3 -> {
                     // Aquí iría el código para guardar el estado actual
                     System.out.println("Guardando partida...");
-                    System.out.println("work in progress");
+                    juego.escribirFichero();
                     System.out.println("Partida guardada con éxito");
                     volver = true;
                 }
@@ -179,6 +179,7 @@ public class Main {
         do {
             try {
                 numero = sc.nextInt();
+                sc.nextLine();
                 if (numero <= max) {
                     return numero;
                 } else {
