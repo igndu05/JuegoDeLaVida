@@ -62,8 +62,8 @@ public class Celula {
     // Para ahorrar trabajo en el futuro esto deberia ser blanco o negro segun el estado
     @Override
     public String toString() {
-        return (this.estado)? "\u2B1C" : "\u2B1B" ; // este pa Linux
-        //return (this.estado)? "X " : "O "; // este pa Windows
+        // return (this.estado)? "\u2B1C" : "\u2B1B" ; // este pa Linux
+        return (this.estado)? "X " : "O "; // este pa Windows
     }
 
     private int celulaVivaAlrededor(Celula[][] tableroCelulas) {

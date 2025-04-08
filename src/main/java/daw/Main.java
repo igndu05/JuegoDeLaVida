@@ -41,6 +41,9 @@ public class Main {
     private static void menuCarga() {
         juego = new JuegoDeLaVida();
         juego.leerFichero();
+        System.out.println("\n==== TABLERO CARGADO ====");
+        juego.mostrarTablero();
+        menuSimulacion();
     }
     
     private static void menuConfiguracion() {
