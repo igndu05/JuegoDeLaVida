@@ -79,7 +79,6 @@ public class Tablero {
         if (pos.getFila() != -1) {
             // Es valida
             this.setEstadoCelula(pos, true);
-            System.out.println("Sa metido :thumbs_up:");
         }
     }
     

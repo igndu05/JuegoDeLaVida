@@ -114,7 +114,6 @@ public class Main {
         // Una vez configurado, ir al menú de simulación
         menuSimulacion();
     }
-    // ESTO ESTA IMCOMPLETO
     private static void menuSimulacion() {
         int opcion;
         boolean volver = false;
