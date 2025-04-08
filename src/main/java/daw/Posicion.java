@@ -4,10 +4,6 @@ import java.util.HashSet;
 
 public class Posicion {
 
-    public static void main(String[] args) {
-
-    }
-
     private int columna;
     private int fila;
 
@@ -100,6 +96,5 @@ public class Posicion {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Formato de posición inválido");
         }
-
     }
 }

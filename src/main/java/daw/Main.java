@@ -42,7 +42,6 @@ public class Main {
         juego = new JuegoDeLaVida();
         juego.leerFichero();
         System.out.println("\n==== TABLERO CARGADO ====");
-        juego.mostrarTablero();
         menuSimulacion();
     }
     

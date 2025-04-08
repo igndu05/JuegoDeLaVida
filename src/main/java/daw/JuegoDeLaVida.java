@@ -122,7 +122,10 @@ public class JuegoDeLaVida {
         // } catch (FileNotFoundException e) {
         //     System.out.println(e.getMessage());
         // }
-        String idFichero = "generacion7.txt";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Indique el numero de la generacion a leer: ");
+        int genNumero = sc.nextInt();
+        String idFichero = "generacion" + genNumero + ".txt";
 
         String[] tokens;
         String linea;
@@ -131,15 +134,19 @@ public class JuegoDeLaVida {
 
         try (Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
             int tamañoMatriz = datosFichero.nextInt();
+
             datosFichero.nextInt();
+
             Tablero nuevoTablero = new Tablero(tamañoMatriz);
-            Celula[][] nuevaMatriz = nuevoTablero.getTablero();
+
+            Celula[][] nuevaMatriz = nuevoTablero.getTablero(); //esto hace un alias molto lindou
             datosFichero.nextLine();
             for (int i = 0; i < tamañoMatriz; i++) {
                 for (int j = 0; j < tamañoMatriz; j++) {
-                    nuevaMatriz[i][j].setEstado(datosFichero.nextBoolean());
+                    nuevaMatriz[i][j].setEstado(datosFichero.nextInt() == 1);
                 }
             }
+            
             this.tablero = nuevoTablero;
             // Tenemos que llegar aqui con el tablero inicializado
         } catch (FileNotFoundException e) {
