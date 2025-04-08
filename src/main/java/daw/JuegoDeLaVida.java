@@ -20,6 +20,10 @@ public class JuegoDeLaVida {
         tablero = new Tablero(tamaño);
     }
 
+    public JuegoDeLaVida() {
+        
+    }
+
     public void mostrarTablero() {
         tablero.mostrarTablero();
     }
@@ -126,7 +130,18 @@ public class JuegoDeLaVida {
         System.out.println("Leyendo el fichero: " + idFichero);
 
         try (Scanner datosFichero = new Scanner(new File(idFichero), "UTF-8")) {
-            linea.
+            int tamañoMatriz = datosFichero.nextInt();
+            datosFichero.nextInt();
+            Tablero nuevoTablero = new Tablero(tamañoMatriz);
+            Celula[][] nuevaMatriz = nuevoTablero.getTablero();
+            datosFichero.nextLine();
+            for (int i = 0; i < tamañoMatriz; i++) {
+                for (int j = 0; j < tamañoMatriz; j++) {
+                    nuevaMatriz[i][j].setEstado(datosFichero.nextBoolean());
+                }
+            }
+            this.tablero = nuevoTablero;
+            // Tenemos que llegar aqui con el tablero inicializado
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }

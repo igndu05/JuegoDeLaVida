@@ -28,7 +28,7 @@ public class Main {
             
             switch (opcion) {
                 case 1 -> menuConfiguracion();
-                case 2 -> System.out.println("work in progress"); //menuCarga();
+                case 2 -> menuCarga();
                 case 0 -> {
                     salir = true;
                     System.out.println("¡Gracias por jugar!");
@@ -36,6 +36,11 @@ public class Main {
                 default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
         } while (!salir);
+    }
+
+    private static void menuCarga() {
+        juego = new JuegoDeLaVida();
+        juego.leerFichero();
     }
     
     private static void menuConfiguracion() {
