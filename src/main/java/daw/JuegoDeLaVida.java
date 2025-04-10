@@ -121,7 +121,6 @@ public class JuegoDeLaVida {
             System.out.println("Error: El archivo generacion" + genNumero + " no existe. Intente con otro número.");
 
         } while (true);
-        sc.close();
 
         System.out.println("Leyendo el fichero: " + archivo.getName());
 

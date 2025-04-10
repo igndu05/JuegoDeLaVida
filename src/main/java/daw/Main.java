@@ -64,6 +64,8 @@ public class Main {
         
         // Menú para elegir forma de colocar células
         menuColocacionCelulas(tamaño);
+        // When a buffer compaction/reallocation occurs the saved indexes must
+        // be modified appropriately
     }
     
     private static void menuColocacionCelulas(int tamaño) {
